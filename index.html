@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        // const regex = /(.*([0-9])\[(.*)\].*)*/dg
+        const regex = /([0-9])\[([^\[\]]*)\]/dg
+
+        const solve = (str) => {
+            const result = /([0-9])\[([^\[\]]*)\]/dg.exec(str);
+            console.log(result)
+
+            const startString = str.slice(0, result.indices[0][0]);
+            // console.log("startString " + startString)
+
+            const endString = str.slice(result.indices[0][1], result.input.length);
+            // console.log("endString " + endString)
+
+            let innerText = '';
+            let returnString = '';
+            // console.log(regex.exec(result[2]));
+
+            // console.log(result[2]);
+            // if (regex.test(result[2])) {
+            //     innerText = solve(result[2])
+            // }
+            // else {
+            innerText = result[2]
+            // }
+            const numberOfReapeat = +result[1];
+            // console.log("numberOfReapeat " + numberOfReapeat)
+            for (let i = 0; i < numberOfReapeat; i++) {
+                returnString += innerText;
+            }
+
+            return startString + returnString + endString;
+        }
+
+        const answer = (str) => {
+            let result = str;
+            while (/([0-9])\[([^\[\]]*)\]/dg.test(result)) {
+                result = solve(result)
+            }
+            return result
+        }
+
+        console.log(answer("ds2[a2[r]]dsd2[a]"))
+        // console.log(solve("a2[r]"))
+    </script>
+</body>
+
+</html>
